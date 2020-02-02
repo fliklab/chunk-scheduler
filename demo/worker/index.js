@@ -1,15 +1,13 @@
 const containerEl = document.querySelector('.container')
 const worker = new Worker('worker.js')
+let N = 0
 
 const bindEvents = () => {
-  document.querySelector('.my-input').addEventListener('input', (e) => {
-    const textValue = e.target.value
-    const length = textValue ? textValue.length : 0
+  document.querySelector('.reset').addEventListener('click', (e) => {
+    N = N + 1
+    const length = N
 
-    if (!length) {
-      containerEl.innerHTML = ''
-      return
-    }
+    document.querySelector('.reset').innerHTML = N
 
     worker.postMessage({
       length,

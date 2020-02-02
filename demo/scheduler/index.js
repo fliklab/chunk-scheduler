@@ -17,11 +17,10 @@ function* chunkGenerator(length) {
     return result
   }
   progressEL.setAttribute('class', 'progress')
-
   document.querySelector('.reset').innerHTML = N
 
   //const n = Math.min(Math.pow(length, 2), 200)
-  const counts = Math.min(length * 5, 60)
+  const counts = Math.min(length * 5, 100)
 
   let drawRadius = 30
   console.log(counts + ': ', counts)
@@ -69,10 +68,6 @@ const scheduler = createScheduler()
 const bindEvents = () => {
   document.querySelector('.reset').addEventListener('click', async (e) => {
     N = N + 1
-
-    if (scheduler.isRunning()) {
-      scheduler.cancel()
-    }
 
     const result = await scheduler.runChunks(chunkGenerator(N))
     containerEl.innerHTML = result

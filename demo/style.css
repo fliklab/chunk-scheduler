@@ -1,6 +1,6 @@
 :root {
-  --progress-height: 40px;
-  --progress-width: 300px;
+  --progress-height: 100px;
+  --progress-width: 100px;
   --progress-border-size: 15px;
   --progress-outer-height: calc(
     var(--progress-height) + var(--progress-border-size) * 2
@@ -31,95 +31,71 @@ body,
 }
 
 .dot.primary {
-  background-color: #ff7c61;
+  background-color: #c2bfbe;
 }
 
 .dot.secondary {
-  background-color: #1affb0;
+  background-color: #a3b1ac;
 }
 
 .dot.tertiary {
-  background-color: #ffd336;
+  background-color: #d1b654;
 }
 
 .dot.quaternary {
-  background-color: #ffffff;
+  background-color: #e4492e;
 }
 
 .my-input {
   position: fixed;
-  height: 40px;
-  width: 300px;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
   top: 50%;
   left: 50%;
+  font-size: 16pt;
+  background-color: rgba(255, 255, 255, 0.25);
   transform: translate(-50%, -50%);
-}
-
-.my-input input {
-  font-size: 30px;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .progress {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: solid 20px rgba(0, 0, 0, 0.5);
+  border-bottom: solid 20px rgba(255, 0, 0, 0.7);
+  background: rgba(10, 120, 200, 0.1);
+  transform: rotate(0deg) translate(-50%, -50%);
+  animation: rotateAnim 10s linear infinite;
   height: calc(var(--progress-outer-height));
   width: calc(var(--progress-outer-width));
-  background: linear-gradient(to right, #2196f3 99.99%, transparent),
-    linear-gradient(to bottom, #2196f3 99.99%, transparent),
-    linear-gradient(to right, #2196f3 99.99%, transparent),
-    linear-gradient(to bottom, #2196f3 99.99%, transparent);
-  background-size: 100% var(--progress-border-size),
-    var(--progress-border-size) 100%, 100% var(--progress-border-size),
-    var(--progress-border-size) 100%;
-  background-repeat: no-repeat;
-  animation: progress 3s linear infinite;
-  background-position: calc(0px - var(--progress-outer-width)) 0px,
-    calc(var(--progress-outer-width) - var(--progress-border-size))
-      calc(0px - var(--progress-outer-height)),
-    var(--progress-outer-width)
-      calc(var(--progress-outer-height) - var(--progress-border-size)),
-    0px var(--progress-outer-height);
+  transition-property: width, height, border, border-bottom, transform;
+  transition-duration: 300ms;
 }
 
-@keyframes progress {
-  0% {
-    background-position: calc(0px - var(--progress-outer-width)) 0px,
-      calc(var(--progress-outer-width) - var(--progress-border-size))
-        calc(0px - var(--progress-outer-height)),
-      var(--progress-outer-width)
-        calc(var(--progress-outer-height) - var(--progress-border-size)),
-      0px var(--progress-outer-height);
+.progress-done {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: solid 5px rgba(0, 0, 0, 0.5);
+  border-bottom: solid 5px rgba(0, 0, 0, 0.5);
+  background: rgba(10, 120, 200, 0.1);
+  transform: rotate(0deg) translate(-50%, -50%);
+  animation: rotateAnim 10s linear infinite;
+  height: 60px;
+  width: 60px;
+  transition-property: width, height, border, border-bottom, transform;
+  transition-duration: 2s;
+}
+
+@keyframes rotateAnim {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-  38% {
-    background-position: 0px 0px,
-      calc(var(--progress-outer-width) - var(--progress-border-size))
-        calc(0px - var(--progress-outer-height)),
-      var(--progress-outer-width)
-        calc(var(--progress-outer-height) - var(--progress-border-size)),
-      0px var(--progress-outer-height);
-  }
-  50% {
-    background-position: 0px 0px,
-      calc(var(--progress-outer-width) - var(--progress-border-size)) 0px,
-      var(--progress-outer-width)
-        calc(var(--progress-outer-height) - var(--progress-border-size)),
-      0px var(--progress-outer-height);
-  }
-  88% {
-    background-position: 0px 0px,
-      calc(var(--progress-outer-width) - var(--progress-border-size)) 0px,
-      0px calc(var(--progress-outer-height) - var(--progress-border-size)),
-      0px var(--progress-outer-height);
-  }
-  100% {
-    background-position: 0px 0px,
-      calc(var(--progress-outer-width) - var(--progress-border-size)) 0px,
-      0px calc(var(--progress-outer-height) - var(--progress-border-size)),
-      0px 0px;
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
